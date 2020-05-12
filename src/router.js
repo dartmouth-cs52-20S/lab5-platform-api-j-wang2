@@ -8,14 +8,24 @@ router.get('/', (req, res) => {
   res.json({ message: 'welcome to our blog api!' });
 });
 
-///your routes will go here
+// your routes will go here
 router.route('/posts')
-    .post()
-    .get()
+    .post((req, res) => {
+        Posts.createPost(req, res);
+    })
+    .get((req, res) => {
+        Posts.getPosts(req, res);
+    });
 
 router.route('/posts/:id')
-    .post()
-    .get()
-    .delete()
+    .put((req, res) => {
+        Posts.updatePost(req, res);
+    })
+    .get((req, res) => {
+        Posts.getPost(req, res);
+    })
+    .delete((req, res) => {
+        Posts.deletePost(req, res);
+    });
 
 export default router;
