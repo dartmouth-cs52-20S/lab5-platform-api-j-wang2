@@ -19,7 +19,12 @@
     "no-shadow": ["error", { "allow": ["done", "res", "cb", "err", "resolve", "reject"] }],
     "no-use-before-define": ["error", { "functions": false }],
     "max-len": 0,
-    "no-param-reassign": 0
+    "no-param-reassign": 0,
+
+    "linebreak-style": "off",
+    "indent": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off"
   },
   "plugins": [
     "import"
