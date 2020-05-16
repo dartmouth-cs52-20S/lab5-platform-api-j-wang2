@@ -14,7 +14,7 @@ router.post('/signup', UserController.signup);
 
 // your routes will go here
 router.route('/posts')
-    .post((req, res) => {
+    .post(requireAuth, (req, res) => {
         Posts.createPost(req, res);
     })
     .get((req, res) => {
@@ -22,13 +22,13 @@ router.route('/posts')
     });
 
 router.route('/posts/:id')
-    .put((req, res) => {
+    .put(requireAuth, (req, res) => {
         Posts.updatePost(req, res);
     })
     .get((req, res) => {
         Posts.getPost(req, res);
     })
-    .delete((req, res) => {
+    .delete(requireAuth, (req, res) => {
         Posts.deletePost(req, res);
     });
 

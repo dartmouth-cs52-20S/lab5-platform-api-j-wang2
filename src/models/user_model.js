@@ -16,7 +16,6 @@ const User = mongoose.model('User', UserSchema);
 UserSchema.pre('save', function beforeUserSave(next) {
     // this is a reference to our model
     // the function runs in some other context so DO NOT bind it
-    const model = this;
     const user = this;
 
     // only hash the password if it has been modified (or is new)
@@ -25,7 +24,6 @@ UserSchema.pre('save', function beforeUserSave(next) {
     // otherwise salt & ash password
     const salt = bcrypt.genSaltSync(10); // generate salt
     const hash = bcrypt.hashSync(`${user.password}`, salt);// hash password
-
 
     user.password = hash;
     return next();

@@ -8,12 +8,17 @@ dotenv.config({ silent: true });
 // process.env.AUTH_SECRET;
 
 export const signin = (req, res, next) => {
+    console.log(req);
     res.send({ token: tokenForUser(req.user) });
+    return next();
 };
 
 export const signup = (req, res, next) => {
-    const { email } = req;
-    const { password } = req;
+    console.log(req.body);
+    const { email } = req.body;
+    const { password } = req.body;
+    console.log(email);
+    console.log(password);
 
     if (!email || !password) {
         return res.status(422).send('You must provide email and password');
