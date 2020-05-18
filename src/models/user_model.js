@@ -11,8 +11,6 @@ const UserSchema = new Schema({
     timestamps: true,
 });
 
-const User = mongoose.model('User', UserSchema);
-
 UserSchema.pre('save', function beforeUserSave(next) {
     // this is a reference to our model
     // the function runs in some other context so DO NOT bind it
@@ -25,6 +23,7 @@ UserSchema.pre('save', function beforeUserSave(next) {
     const salt = bcrypt.genSaltSync(10); // generate salt
     const hash = bcrypt.hashSync(`${user.password}`, salt);// hash password
 
+    console.log(hash);
     user.password = hash;
     return next();
 });
@@ -39,5 +38,7 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
         return callback(null, comparisonResult);
     });
 };
+
+const User = mongoose.model('User', UserSchema);
 
 export default User;

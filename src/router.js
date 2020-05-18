@@ -10,6 +10,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/signin', requireSignin, UserController.signin);
+// router.post('/signin', UserController.signin);
+
 router.post('/signup', UserController.signup);
 
 // your routes will go here

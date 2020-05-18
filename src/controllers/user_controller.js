@@ -4,12 +4,9 @@ import User from '../models/user_model';
 
 dotenv.config({ silent: true });
 
-// and then the secret is usable this way:
-// process.env.AUTH_SECRET;
-
 export const signin = (req, res, next) => {
-    console.log(req);
-    res.send({ token: tokenForUser(req.user) });
+    console.log(req.body);
+    res.send({ token: tokenForUser(req.body) });
     return next();
 };
 
@@ -32,6 +29,7 @@ export const signup = (req, res, next) => {
         newUser.email = req.body.email;
         newUser.password = req.body.password;
         newUser.save().then((result) => {
+            console.log(result);
             res.send({ token: tokenForUser(newUser) });
         }).catch((error) => {
             return res.status(500).json({ error });
