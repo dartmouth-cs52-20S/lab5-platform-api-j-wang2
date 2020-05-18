@@ -15,12 +15,13 @@ export const signin = (req, res, next) => {
 export const signup = (req, res, next) => {
     console.log(req.body);
     const { email } = req.body;
+    const { username } = req.body;
     const { password } = req.body;
     console.log(email);
     console.log(password);
 
-    if (!email || !password) {
-        return res.status(422).send('You must provide email and password');
+    if (!email || !username || !password) {
+        return res.status(422).send('You must provide email, username, and password');
     }
 
     // check what User.find() returns
@@ -31,6 +32,7 @@ export const signup = (req, res, next) => {
         } else {
             const newUser = new User();
             newUser.email = req.body.email;
+            newUser.username = req.body.username;
             newUser.password = req.body.password;
             newUser.save().then((userResult) => {
                 console.log(userResult);

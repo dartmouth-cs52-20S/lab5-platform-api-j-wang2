@@ -6,6 +6,7 @@ export const createPost = (req, res) => {
     post.tags = req.body.tags;
     post.contents = req.body.contents;
     post.coverUrl = req.body.coverUrl;
+    post.author = req.user._id;
 
     post.save().then((result) => {
         res.json({ message: 'Post created!' });
@@ -26,7 +27,8 @@ export const getPosts = (req, res) => {
 
 export const getPost = (req, res) => {
     const { id } = req.params;
-    Post.findById(id).then((result) => {
+    Post.findById(id).populate('author').then((result) => {
+        // populate(author);
         res.json({ result });
     })
     .catch((error) => {
