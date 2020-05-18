@@ -5,9 +5,11 @@ import User from '../models/user_model';
 dotenv.config({ silent: true });
 
 export const signin = (req, res, next) => {
-    console.log(req.body);
-    res.send({ token: tokenForUser(req.body) });
-    return next();
+    console.log(req.user);
+    // res.send({ token: tokenForUser(req.body) });
+    res.send({ token: tokenForUser(req.user) });
+
+    // return next();
 };
 
 export const signup = (req, res, next) => {
