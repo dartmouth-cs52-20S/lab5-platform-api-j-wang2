@@ -22,20 +22,22 @@ export const signup = (req, res, next) => {
     }
 
     // check what User.find() returns
-    if (User.find({ email, password })) {
-        res.send({ error: 'User already exists' });
-    } else {
-        const newUser = new User();
-        newUser.email = req.body.email;
-        newUser.password = req.body.password;
-        newUser.save().then((result) => {
+    User.findOne({ email }).then((result) => {
+        if (result) {
             console.log(result);
-            res.send({ token: tokenForUser(newUser) });
-        }).catch((error) => {
-            return res.status(500).json({ error });
-        });
-    }
-    return next();
+            res.send({ error: 'User already exists' });
+        } else {
+            const newUser = new User();
+            newUser.email = req.body.email;
+            newUser.password = req.body.password;
+            newUser.save().then((userResult) => {
+                console.log(userResult);
+                res.send({ token: tokenForUser(newUser) });
+            }).catch((error) => {
+                return res.status(500).json({ error });
+            });
+        }
+    })
 };
 
 // encodes a new token for a user object

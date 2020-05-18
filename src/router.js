@@ -16,9 +16,7 @@ router.post('/signup', UserController.signup);
 
 // your routes will go here
 router.route('/posts')
-    .post(requireAuth, (req, res) => {
-        Posts.createPost(req, res);
-    })
+    .post(requireAuth, Posts.createPost)
     .get((req, res) => {
         Posts.getPosts(req, res);
     });
