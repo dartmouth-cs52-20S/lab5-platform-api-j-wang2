@@ -38,7 +38,8 @@ export const getPost = (req, res) => {
 
 export const deletePost = (req, res) => {
     const { id } = req.params;
-    Post.findByIdandDelete(id).then((result) => {
+    console.log(id);
+    Post.findByIdAndDelete(id).then((result) => {
         res.json({ message: 'Post deleted!' });
     })
     .catch((error) => {
